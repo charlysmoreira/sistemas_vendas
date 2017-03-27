@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	<ui:define name="titulo">
+		<h1>
+			<h:outputText value="Novo Pedido de Venda" style="COLOR: #0080c0;" />
+		</h1>
+	</ui:define>
+	<ui:define name="body">
+		<rich:panel header="Pedido de Venda">
+			<h:form>
+			<a:keepAlive beanName="pedidoControlerBean" />
+			<a:loadScript src="/pluguin/geralJs.js" />
+				<a:region>
+					<h:outputLink value="#" id="linkClientePedido">
+       				 Pesquisa Cliente
+        		 <rich:componentControl for="modalClientePedido"
+							attachTo="linkClientePedido" operation="show" event="onclick" />
+					</h:outputLink>
+					<rich:modalPanel id="modalClientePedido" width="1100" height="300">
+						<f:facet name="header">
+							<h:panelGroup>
+								<h:outputText value="Pesquisa Cliente"></h:outputText>
+							</h:panelGroup>
+						</f:facet>
+						<f:facet name="controls">
+							<h:panelGroup>
+								<h:outputText value="[X]" style="cursor: pointer"
+									styleClass="linkClientePedido" id="hidelinkClientePedido" />
+								<rich:componentControl for="modalClientePedido"
+									attachTo="hidelinkClientePedido" operation="hide" event="onclick" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:spacer height="10" />
+						<h:panelGrid columns="2">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+							<h:inputText
+								value="#{ordemServicoControlerBean.nomePesquisaCliente}"
+								style=" width : 173px;" />
+							<a:commandButton reRender="tabelaClientePedido"
+								action="#{pedidoControlerBean.listaClientes}"
+								value="Pesquisar" />
+						</h:panelGrid>
+						<rich:spacer height="10" />
+						<rich:dataTable width="100%" rows="5" id="tabelaClientePedido"
+							value="#{pedidoControlerBean.listaDeClientes}" border="1"
+							var="cliente">
+
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Nome ou Razão Social"
+										style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.nome}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Fax" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.fax}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="CNPJ" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.cnpj}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Contato" style="FONT-WEIGHT: bold; " />
+								</f:facet>
+								<h:outputText value="#{cliente.contato}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Inscrição Estadual"
+										style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.inscEstadual}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Telefone" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.telefone}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Cep" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.cep}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Endereço" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.endereco}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Bairro" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.bairro}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Cidade" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.cidade}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Estado" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.estado}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Email" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:outputText value="#{cliente.email}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Incluir Cliente"
+										style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<a:commandLink
+									action="#{pedidoControlerBean.icluirClientePedido}"
+									reRender="gridClientePedido,modalClientePedido" id="clienteIncluirPedido">
+									<f:param name="id" value="#{cliente.id}" />
+									<h:graphicImage value="/images/icons/incluir.png"
+										style="border:0"></h:graphicImage>
+								</a:commandLink>
+								<rich:toolTip for="clienteIncluirPedido"
+									value="Deseja Incluir este Cliente?" />
+							</rich:column>
+						</rich:dataTable>
+						<rich:datascroller align="left" for="tabelaClientePedido" maxPages="20"
+							reRender="tabelaClientePedido" />
+					</rich:modalPanel>
+				</a:region>
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="2" id="gridClientePedido">
+						<h:outputText value="Cliente" style="FONT-SIZE: small;" />
+						<h:outputText value="Funcionário" style="FONT-SIZE: small;" />
+						<h:inputText required="true"
+							requiredMessage="Cliente é obrigatorio"
+							onkeypress="return somente_txt(event)" readonly="true"
+							value="#{pedidoControlerBean.cliente.nome}"
+							style=" width : 178px;" />
+						<h:selectOneMenu
+							value="#{pedidoControlerBean.pedido.vendedor}"
+							converter="vendedorConverter" style=" width : 146px;">
+							<f:selectItem itemLabel="Selecionar" />
+							<f:selectItems value="#{pedidoControlerBean.funcinarios}" />
+						</h:selectOneMenu>
+							<h:outputText value="Data da Venda" style="FONT-SIZE: small;" />
+							<h:outputText value="Data de Entraga" style="FONT-SIZE: small;" />
+							<h:inputText value="#{pedidoControlerBean.dataAtual}"
+							readonly="true" style=" width : 150px;">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:inputText>
+							<a:outputPanel id="calendarEntrega" layout="block"
+							style=" width : 220px;">
+							<rich:calendar	value="#{pedidoControlerBean.pedido.dataEntrega}"
+								datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+								style="width:200px" />
+							</a:outputPanel>
+							<h:outputText value="Referencia" style="FONT-SIZE: small;" />
+							<h:outputText value="Frete" style="FONT-SIZE: small;" />
+							<h:inputText required="true" requiredMessage="Referencia é obrigatorio"
+							value="#{pedidoControlerBean.pedido.referencia}"
+							style=" width : 178px;" />
+							<h:inputText required="true" requiredMessage="Frete é obrigatorio"
+							value="#{pedidoControlerBean.pedido.frete}" style=" width : 178px;" />
+							
+							<h:outputText value="Seguro" style="FONT-SIZE: small;" />
+							<h:outputText value="Outras Despesas" style="FONT-SIZE: small;" />
+							<h:inputText required="true" requiredMessage="Seguro é obrigatorio"
+							value="#{pedidoControlerBean.pedido.seguro}"
+							style=" width : 178px;" />
+							<h:inputText required="true" requiredMessage="Despesas é obrigatorio"
+							value="#{pedidoControlerBean.pedido.despesa}"
+							style=" width : 178px;" />
+							<h:panelGrid columns="1" style=" width : 195px;">
+							<h:outputText value="Observações Gerais"
+								style="FONT-SIZE: small;" />
+							<h:inputTextarea rows="6" style="height : 120px; width : 168px;"
+								value="#{pedidoControlerBean.pedido.observacao}" />
+						</h:panelGrid>
+						</h:panelGrid>
+					<rich:panel header="Adicionar Produto" style="width : 560px; height : 320px;">
+					<a:region> 
+					  	<h:outputLink value="#" id="linkProdutoPedido">
+       						 Pesquisa Produto
+        					<rich:componentControl for="modalProdutoPedido" attachTo="linkProdutoPedido" operation="show" event="onclick"/>
+   						 </h:outputLink>
+						<h:panelGrid columns = "2" id="gridProduto">
+						<h:outputText value="Nome do Produto" style="FONT-SIZE: small;"/>
+						<h:inputText onkeypress="return somente_txt(event)" readonly="true" 
+						value="#{pedidoControlerBean.produto.nome}" style=" width : 178px;" />
+						
+						<h:outputText value="Quantidade" style="FONT-SIZE: small;"/>
+						<h:inputText onkeypress="return apenasNumero(event)"
+						value="#{pedidoControlerBean.quantidadeProduto}" style=" width : 178px;" />
+						
+						<h:outputText value="Preço Unitário" style="FONT-SIZE: small;"/>
+						<h:inputText onkeypress="return apenasNumero(event)" readonly="true" 
+						value="#{pedidoControlerBean.produto.valor}" style=" width : 178px;" />
+						</h:panelGrid>
+						<rich:spacer height="5" />
+						<rich:dataTable width="100%" rows="10" id="tabelaProdutoPedido"
+							value="#{pedidoControlerBean.listaItensProduto}" border="1"
+							var="pedido">
+								<rich:column>
+									<f:facet name="header">
+										<h:outputText value="Nome do Produto" style="FONT-WEIGHT: bold;" />
+									</f:facet>
+									<h:outputText value="#{pedido.produto.nome}" />
+								</rich:column>
+
+								<rich:column>
+									<f:facet name="header">
+										<h:outputText value="Quantidade" style="FONT-WEIGHT: bold;" />
+									</f:facet>
+									<h:outputText value="#{pedido.quantidade}" />
+								</rich:column>
+								
+								<rich:column>
+									<f:facet name="header">
+										<h:outputText value="Preço Unitário" style="FONT-WEIGHT: bold;" />
+									</f:facet>
+									<h:outputText value="#{pedido.produto.valor}" />
+								</rich:column>
+
+								<rich:column>
+									<f:facet name="header">
+										<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+									</f:facet>
+									<a:commandLink action="#{pedidoControlerBean.removerProdutoPedido}"
+										id="deleteProduto" reRender="tabelaProdutoPedido">
+										<f:setPropertyActionListener value="#{pedido}" target="#{pedidoControlerBean.itemPedido}"/>
+										<h:graphicImage value="/images/icons/excluir.png"
+											style="border:0"></h:graphicImage>
+									</a:commandLink>
+									<rich:toolTip for="deleteProduto" value="Deletar" />
+								</rich:column>
+							</rich:dataTable>
+							<rich:spacer height="20" />
+							 <a:commandButton action="#{pedidoControlerBean.addProdutoPedido}"
+								value="Adiciona Produto" reRender="tabelaProdutoPedido,gridProduto" />
+
+								<rich:modalPanel id="modalProdutoPedido" width="895" height="300">
+									<f:facet name="header">
+										<h:panelGroup>
+											<h:outputText value="Pesquisa Produto"></h:outputText>
+										</h:panelGroup>
+									</f:facet>
+									<f:facet name="controls">
+										<h:panelGroup>
+											<h:outputText value="[X]" style="cursor: pointer"
+												styleClass="hidelink" id="hidelinkProduto" />
+											<rich:componentControl for="modalProdutoPedido" attachTo="hidelinkProduto"
+												operation="hide" event="onclick" />
+										</h:panelGroup>
+									</f:facet>
+									<rich:spacer height="10" />
+									<h:panelGrid columns="2">
+										<h:outputText value="Nome do Produto" style="FONT-WEIGHT: bold;" />
+										<h:inputText value="#{pedidoControlerBean.nomeDaPesquisaProduto}"
+											style=" width : 173px;" />
+									</h:panelGrid>
+									<h:panelGrid columns="2">
+										<a:commandButton reRender="tabelaModalProduto" action="#{pedidoControlerBean.listaProdutos}"
+											value="Pesquisar" />
+									</h:panelGrid>
+									<rich:spacer height="10" />
+									<rich:dataTable width="100%" rows="5" id="tabelaModalProduto"
+										value="#{pedidoControlerBean.listaDeProdutos}" border="1"
+										var="produto">
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Código" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.codigo}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.nome}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Descição" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.descricao}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Especificação"
+													style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.especificao}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Categoria" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.categoria.nome}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Marca" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<h:outputText value="#{produto.marca.nome}" />
+										</rich:column>
+										<rich:column>
+											<f:facet name="header">
+												<h:outputText value="Incluir Produto" style="FONT-WEIGHT: bold;" />
+											</f:facet>
+											<a:commandLink action="#{pedidoControlerBean.icluirProdutoPedido}" reRender="gridProduto,modalProdutoPedido"
+												id="incluiProduto">
+												<f:param name="id" value="#{produto.id}" />
+												<h:graphicImage value="/images/icons/incluir.png"
+													style="border:0"></h:graphicImage>
+											</a:commandLink>
+											<rich:toolTip for="incluiProduto" value="Incluir este Produto"/>
+										</rich:column>
+
+									</rich:dataTable>
+									<rich:datascroller align="left" for="tabelaModalProduto" maxPages="20"
+										reRender="tabelaModalProduto" />
+
+								</rich:modalPanel>
+							</a:region> 
+					</rich:panel>
+				</h:panelGrid>
+				<h:panelGrid>
+					<a:region> 
+					  	<h:outputLink value="#" id="linkFormaDePagamento">
+       						 Forma de Pagamento
+        					<rich:componentControl for="modalFormaDePagamento" attachTo="linkFormaDePagamento" operation="show" event="onclick"/>
+   						 </h:outputLink>
+   					</a:region>
+   					<rich:spacer width="1" height="20" />
+				</h:panelGrid>
+				<a:commandButton action="#{pedidoControlerBean.salvarComoVenda}" value="Salvar como Venda"/>
+				<h:messages/>
+				
+				<a:status id="statusAguarde" onstart="Richfaces.showModalPanel('ajaxLoadingModalBox',{top:300})" 
+			     		onstop="Richfaces.hideModalPanel('ajaxLoadingModalBox')"/>
+				<rich:modalPanel id="ajaxLoadingModalBox" autosized="true" width="58" height="50" >
+				     <div class="loader">
+						Aguarde...
+						<h:graphicImage id="imgLoader" value="/images/loader.gif"/>
+					</div>
+				</rich:modalPanel>
+				</h:form>
+			</rich:panel>
+
+		<rich:modalPanel id="modalFormaDePagamento" width="755" height="255">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="Forma de Pagamento"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<f:facet name="controls">
+				<h:panelGroup>
+					<h:outputText value="[X]" style="cursor: pointer"
+						styleClass="hidelink" id="hidelinkFormaDePagamento" />
+					<rich:componentControl for="modalFormaDePagamento"
+						attachTo="hidelinkFormaDePagamento" operation="hide"
+						event="onclick" />
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<rich:spacer height="10" />
+				<h:panelGrid columns="4">
+					<h:outputText value="Forma de Pagamento" style="FONT-SIZE: small;" />
+					<h:outputText value="Parcelas" style="FONT-SIZE: small;" />
+					<h:outputText value="Tipo de Entrada" style="FONT-SIZE: small;" />
+					<h:outputText value="Valor de Entrada" style="FONT-SIZE: small;" />
+					<h:selectOneMenu
+						value="#{pedidoControlerBean.formaDePagamento.pagamento}"
+						style=" width : 178px;">
+						<f:selectItem itemLabel="Selecionar" />
+						<f:selectItems value="#{pedidoControlerBean.pagamentoLista}" />
+					</h:selectOneMenu>
+					<h:selectOneMenu
+						value="#{pedidoControlerBean.formaDePagamento.parcela}"
+						style=" width : 178px;">
+						<f:selectItem itemLabel="Selecionar" />
+						<f:selectItems value="#{pedidoControlerBean.parcelaLista}" />
+					</h:selectOneMenu>
+					<h:selectOneMenu
+						value="#{pedidoControlerBean.formaDePagamento.tipoDeEntrada}"
+						style=" width : 178px;">
+						<f:selectItem itemLabel="Selecionar" />
+						<f:selectItems value="#{pedidoControlerBean.tipoDeEntradaLista}" />
+					</h:selectOneMenu>
+					<h:inputText value="#{pedidoControlerBean.formaDePagamento.valorEntrada}"
+						style=" width : 178px;" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="Tipo de desconto" style="FONT-SIZE: small;" />
+					<h:outputText value="Valor desconto" style="FONT-SIZE: small;" />
+					<h:selectOneMenu
+						value="#{pedidoControlerBean.formaDePagamento.tipoDeDesconto}"
+						style=" width : 178px;">
+						<f:selectItem itemLabel="Selecionar" />
+						<f:selectItems value="#{pedidoControlerBean.tipoDeDescontoLista}" />
+					</h:selectOneMenu>
+					<h:inputText value="#{pedidoControlerBean.formaDePagamento.desconto}"
+						style=" width : 178px;" />
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<h:panelGrid columns="2">
+					<h:selectBooleanCheckbox value="#{pedidoControlerBean.formaDePagamento.juros}">
+					</h:selectBooleanCheckbox>
+					<h:outputText value="Juros(0,00%)" />
+					<h:selectBooleanCheckbox value="#{pedidoControlerBean.formaDePagamento.taxaFixa}">
+					</h:selectBooleanCheckbox>
+					<h:outputText value="Taxa fixa($0,00)" />
+				</h:panelGrid>
+				<rich:spacer width="1" height="15" />
+				<rich:separator height="2" lineType="solid" />
+				<br />
+				<rich:spacer width="1" height="15" />
+				<a:commandButton action="#{pedidoControlerBean.addFormaDePagamento}"
+					value="Salvar" reRender="modalFormaDePagamento" />
+			</h:form>
+		</rich:modalPanel>
+
+	</ui:define>
+</ui:composition>

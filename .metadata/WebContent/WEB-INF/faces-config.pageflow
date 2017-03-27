@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13293285027530" configfile="/SVendas/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/user/lista.xhtml" x="338" y="2098" id="pf13293303178751" referenceLink="//@navigationRule.18/@navigationCase.0/@toViewId|" outlinks="pf13293303178752" inlinks="pf13293303178753" path="/pages/user/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/user/cadastro.xhtml" x="554" y="2300" id="pf13293303178754" referenceLink="//@navigationRule.18/@navigationCase.1/@toViewId|" inlinks="pf13293303178752 pf13293967618832" path="/pages/user/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="4325" id="pf13293303178756" referenceLink="//@navigationRule.19/@fromViewId|" outlinks="pf13293303178753 pf13293966329500 pf13293967618832 pf13294870517460 pf13294870517461 pf13294904268278 pf13294904268279 pf132949042682710 pf132949042682711 pf13300896284010 pf13300896284011 pf13300896284012 pf13300896284013 pf13300896284014 pf13300896284015 pf13300896284016 pf13300896284017 pf13300896284018 pf13300896284019 pf133008962840110 pf133008962840111 pf133008969249233 pf133008969249234 pf13306042858750 pf13306042858751 pf13306923426950 pf13306923426951 pf13311280000190 pf13311282970976 pf13315688342000 pf13315688342001 pf13316604049260 pf13323354856900 pf13339729438690 pf13339729438691" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="login/login.xhtml" x="338" y="1330" id="pf13293966329501" referenceLink="//@navigationRule.18/@navigationCase.32/@toViewId|" inlinks="pf13293966329500" path="/login/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/produto/lista.xhtml" x="338" y="2503" id="pf13293997182443" referenceLink="//@navigationRule.18/@navigationCase.2/@toViewId|" outlinks="pf13293997182444" inlinks="pf13294870517460" path="/pages/produto/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/produto/cadastro.xhtml" x="554" y="2705" id="pf13293997182445" referenceLink="//@navigationRule.18/@navigationCase.3/@toViewId|" inlinks="pf13293997182444 pf13294870517461" path="/pages/produto/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/marca/lista.xhtml" x="338" y="2908" id="pf13294902159802" referenceLink="//@navigationRule.18/@navigationCase.6/@toViewId|" outlinks="pf13294902159803" inlinks="pf132949042682710" path="/pages/marca/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/marca/cadastro.xhtml" x="554" y="3110" id="pf13294902159804" referenceLink="//@navigationRule.18/@navigationCase.7/@toViewId|" inlinks="pf13294902159803 pf132949042682711" path="/pages/marca/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/categoria/lista.xhtml" x="338" y="3313" id="pf13294902159805" referenceLink="//@navigationRule.19/@navigationCase.32/@toViewId|" outlinks="pf13294902159806" inlinks="pf13294904268278" path="/pages/categoria/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/categoria/cadastro.xhtml" x="554" y="3515" id="pf13294902159817" referenceLink="//@navigationRule.19/@navigationCase.33/@toViewId|" inlinks="pf13294902159806 pf13294904268279" path="/pages/categoria/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/empresa/lista.xhtml" x="338" y="3718" id="pf133008962840112" referenceLink="//@navigationRule.18/@navigationCase.8/@toViewId|" outlinks="pf133008962840113" inlinks="pf13300896284010" path="/pages/empresa/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/empresa/cadastro.xhtml" x="554" y="3920" id="pf133008962840114" referenceLink="//@navigationRule.18/@navigationCase.9/@toViewId|" inlinks="pf133008962840113 pf13300896284011" path="/pages/empresa/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cidade/lista.xhtml" x="338" y="4123" id="pf133008962840115" referenceLink="//@navigationRule.18/@navigationCase.10/@toViewId|" outlinks="pf133008962840116" inlinks="pf13300896284012" path="/pages/cidade/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cidade/cadastro.xhtml" x="554" y="4325" id="pf133008962840217" referenceLink="//@navigationRule.18/@navigationCase.11/@toViewId|" inlinks="pf133008962840116 pf13300896284013" path="/pages/cidade/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tipo/lista.xhtml" x="338" y="4528" id="pf133008962840218" referenceLink="//@navigationRule.18/@navigationCase.12/@toViewId|" outlinks="pf133008962840219" inlinks="pf13300896284014" path="/pages/tipo/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tipo/cadastro.xhtml" x="554" y="4730" id="pf133008962840220" referenceLink="//@navigationRule.18/@navigationCase.13/@toViewId|" inlinks="pf133008962840219 pf13300896284015" path="/pages/tipo/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/transportadora/lista.xhtml" x="338" y="4933" id="pf133008962840221" referenceLink="//@navigationRule.18/@navigationCase.14/@toViewId|" outlinks="pf133008962840222" inlinks="pf13300896284016" path="/pages/transportadora/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/transportadora/cadastro.xhtml" x="554" y="5135" id="pf133008962840223" referenceLink="//@navigationRule.18/@navigationCase.15/@toViewId|" inlinks="pf133008962840222 pf13300896284017" path="/pages/transportadora/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/vendedor/lista.xhtml" x="338" y="5338" id="pf133008962840224" referenceLink="//@navigationRule.18/@navigationCase.16/@toViewId|" outlinks="pf133008962840225" inlinks="pf13300896284018" path="/pages/vendedor/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/vendedor/cadastro.xhtml" x="554" y="5540" id="pf133008962840226" referenceLink="//@navigationRule.18/@navigationCase.17/@toViewId|" inlinks="pf133008962840225 pf13300896284019" path="/pages/vendedor/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/fornecedor/lista.xhtml" x="338" y="5743" id="pf133008962840227" referenceLink="//@navigationRule.18/@navigationCase.18/@toViewId|" outlinks="pf133008962840228" inlinks="pf133008962840110" path="/pages/fornecedor/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/fornecedor/cadastro.xhtml" x="554" y="5945" id="pf133008962840229" referenceLink="//@navigationRule.18/@navigationCase.19/@toViewId|" inlinks="pf133008962840228 pf133008962840111" path="/pages/fornecedor/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tecnico/lista.xhtml" x="338" y="6148" id="pf133008962840230" referenceLink="//@navigationRule.18/@navigationCase.20/@toViewId|" outlinks="pf133008962840231" inlinks="pf133008969249233" path="/pages/tecnico/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/tecnico/cadastro.xhtml" x="554" y="6350" id="pf133008962840232" referenceLink="//@navigationRule.18/@navigationCase.21/@toViewId|" inlinks="pf133008962840231 pf133008969249234" path="/pages/tecnico/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/servico/lista.xhtml" x="338" y="6553" id="pf13306042858792" referenceLink="//@navigationRule.18/@navigationCase.22/@toViewId|" outlinks="pf13306042858793" inlinks="pf13306042858750" path="/pages/servico/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/servico/cadastro.xhtml" x="554" y="6755" id="pf13306042858794" referenceLink="//@navigationRule.18/@navigationCase.23/@toViewId|" inlinks="pf13306042858793 pf13306042858751" path="/pages/servico/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cliente/lista.xhtml" x="338" y="6958" id="pf13306923426972" referenceLink="//@navigationRule.18/@navigationCase.24/@toViewId|" outlinks="pf13306923426973" inlinks="pf13306923426950" path="/pages/cliente/lista.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cliente/cadastro.xhtml" x="554" y="7160" id="pf13306923426974" referenceLink="//@navigationRule.18/@navigationCase.25/@toViewId|" inlinks="pf13306923426973 pf13306923426951" path="/pages/cliente/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf13311280000201" outlinks="pf13311280000212 pf13311282515934 pf13315688342012 pf13316604049271 pf13323354856951 pf13339729438702" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/ordemServico/cadastro.xhtml" x="338" y="946" id="pf13311280000213" referenceLink="//@navigationRule.18/@navigationCase.26/@toViewId|" inlinks="pf13311280000212 pf13311280000190" path="/pages/ordemServico/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/pedido/cadastro.xhtml" x="338" y="178" id="pf13311282515935" referenceLink="//@navigationRule.18/@navigationCase.27/@toViewId|" inlinks="pf13311282515934 pf13311282970976" path="/pages/pedido/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/relatorios/pedido.xhtml" x="338" y="562" id="pf13315688342013" referenceLink="//@navigationRule.18/@navigationCase.29/@toViewId|" inlinks="pf13315688342012 pf13315688342001" path="/pages/relatorios/pedido.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/pedido/visualizar.xhtml" x="338" y="1714" id="pf13315688342014" referenceLink="//@navigationRule.18/@navigationCase.28/@toViewId|" inlinks="pf13315688342000" path="/pages/pedido/visualizar.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/caixa/cadastro.xhtml" id="pf13316604049272" referenceLink="//@navigationRule.18/@navigationCase.30/@toViewId|" inlinks="pf13316604049271 pf13316604049260" path="/pages/caixa/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/nota/cadastro.xhtml" id="pf13323354856962" referenceLink="//@navigationRule.18/@navigationCase.0/@toViewId|" inlinks="pf13323354856951 pf13323354856900" path="/pages/nota/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/totalizador/cadastro.xhtml" id="pf13339729438713" referenceLink="//@navigationRule.19/@navigationCase.33/@toViewId|" inlinks="pf13339729438702 pf13339729438691" path="/pages/totalizador/cadastro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/totalizador/lista.xhtml" id="pf13339729438714" referenceLink="//@navigationRule.19/@navigationCase.32/@toViewId|" inlinks="pf13339729438690" path="/pages/totalizador/lista.xhtml"/>
+  <links id="pf13293303178752" target="pf13293303178754" source="pf13293303178751" outcome="cadastroUser"/>
+  <links id="pf13293303178753" target="pf13293303178751" source="pf13293303178756" outcome="listaUsuario"/>
+  <links id="pf13293966329500" target="pf13293966329501" source="pf13293303178756" outcome="login"/>
+  <links id="pf13293967618832" target="pf13293303178754" source="pf13293303178756" outcome="cadastroUser"/>
+  <links id="pf13293997182444" target="pf13293997182445" source="pf13293997182443" outcome="cadastroProduto"/>
+  <links id="pf13294870517460" target="pf13293997182443" source="pf13293303178756" outcome="listaProduto"/>
+  <links id="pf13294870517461" target="pf13293997182445" source="pf13293303178756" outcome="cadastroProduto"/>
+  <links id="pf13294902159803" target="pf13294902159804" source="pf13294902159802" outcome="cadastroMarca"/>
+  <links id="pf13294902159806" target="pf13294902159817" source="pf13294902159805" outcome="cadastroCategoria"/>
+  <links id="pf13294904268278" target="pf13294902159805" source="pf13293303178756" outcome="listaCategoria"/>
+  <links id="pf13294904268279" target="pf13294902159817" source="pf13293303178756" outcome="cadastroCategoria"/>
+  <links id="pf132949042682710" target="pf13294902159802" source="pf13293303178756" outcome="listaMarca"/>
+  <links id="pf132949042682711" target="pf13294902159804" source="pf13293303178756" outcome="cadastroMarca"/>
+  <links id="pf133008962840113" target="pf133008962840114" source="pf133008962840112" outcome="cadastroEmpresa"/>
+  <links id="pf133008962840116" target="pf133008962840217" source="pf133008962840115" outcome="cadastroCidade"/>
+  <links id="pf133008962840219" target="pf133008962840220" source="pf133008962840218" outcome="cadastroTipo"/>
+  <links id="pf133008962840222" target="pf133008962840223" source="pf133008962840221" outcome="cadastroTransportadora"/>
+  <links id="pf133008962840225" target="pf133008962840226" source="pf133008962840224" outcome="cadastroVendedor"/>
+  <links id="pf133008962840228" target="pf133008962840229" source="pf133008962840227" outcome="cadastroFornecedor"/>
+  <links id="pf13300896284010" target="pf133008962840112" source="pf13293303178756" outcome="listaEmpresa"/>
+  <links id="pf13300896284011" target="pf133008962840114" source="pf13293303178756" outcome="cadastroEmpresa"/>
+  <links id="pf13300896284012" target="pf133008962840115" source="pf13293303178756" outcome="listaCidade"/>
+  <links id="pf13300896284013" target="pf133008962840217" source="pf13293303178756" outcome="cadastroCidade"/>
+  <links id="pf13300896284014" target="pf133008962840218" source="pf13293303178756" outcome="listaTipo"/>
+  <links id="pf13300896284015" target="pf133008962840220" source="pf13293303178756" outcome="cadastroTipo"/>
+  <links id="pf13300896284016" target="pf133008962840221" source="pf13293303178756" outcome="listaTransportadora"/>
+  <links id="pf13300896284017" target="pf133008962840223" source="pf13293303178756" outcome="cadastroTransportadora"/>
+  <links id="pf13300896284018" target="pf133008962840224" source="pf13293303178756" outcome="listaVendedor"/>
+  <links id="pf13300896284019" target="pf133008962840226" source="pf13293303178756" outcome="cadastroVendedor"/>
+  <links id="pf133008962840110" target="pf133008962840227" source="pf13293303178756" outcome="listaFornecedor"/>
+  <links id="pf133008962840111" target="pf133008962840229" source="pf13293303178756" outcome="cadastroFornecedor"/>
+  <links id="pf133008962840231" target="pf133008962840232" source="pf133008962840230" outcome="cadastroTecnico"/>
+  <links id="pf133008969249233" target="pf133008962840230" source="pf13293303178756" outcome="listaTecnico"/>
+  <links id="pf133008969249234" target="pf133008962840232" source="pf13293303178756" outcome="cadastroTecnico"/>
+  <links id="pf13306042858793" target="pf13306042858794" source="pf13306042858792" outcome="cadastroServico"/>
+  <links id="pf13306042858750" target="pf13306042858792" source="pf13293303178756" outcome="listaServico"/>
+  <links id="pf13306042858751" target="pf13306042858794" source="pf13293303178756" outcome="cadastroServico"/>
+  <links id="pf13306923426973" target="pf13306923426974" source="pf13306923426972" outcome="cadastroCliente"/>
+  <links id="pf13306923426950" target="pf13306923426972" source="pf13293303178756" outcome="listaCliente"/>
+  <links id="pf13306923426951" target="pf13306923426974" source="pf13293303178756" outcome="cadastroCliente"/>
+  <links id="pf13311280000212" target="pf13311280000213" source="pf13311280000201" outcome="cadastroOrdemServico"/>
+  <links id="pf13311280000190" target="pf13311280000213" source="pf13293303178756" outcome="cadastroOrdemServico"/>
+  <links id="pf13311282515934" target="pf13311282515935" source="pf13311280000201" outcome="cadastroPedido"/>
+  <links id="pf13311282970976" target="pf13311282515935" source="pf13293303178756" outcome="cadastroPedido"/>
+  <links id="pf13315688342012" target="pf13315688342013" source="pf13311280000201" outcome="relatorioPedido"/>
+  <links id="pf13315688342000" target="pf13315688342014" source="pf13293303178756" outcome="visualizaVenda"/>
+  <links id="pf13315688342001" target="pf13315688342013" source="pf13293303178756" outcome="relatorioPedido"/>
+  <links id="pf13316604049271" target="pf13316604049272" source="pf13311280000201" outcome="cadastroCaixa"/>
+  <links id="pf13316604049260" target="pf13316604049272" source="pf13293303178756" outcome="cadastroCaixa"/>
+  <links id="pf13323354856951" target="pf13323354856962" source="pf13311280000201" outcome="cadastroNF"/>
+  <links id="pf13323354856900" target="pf13323354856962" source="pf13293303178756" outcome="cadastroNF"/>
+  <links id="pf13339729438702" target="pf13339729438713" source="pf13311280000201" outcome="cadastroTotalizadores"/>
+  <links id="pf13339729438690" target="pf13339729438714" source="pf13293303178756" outcome="listaTotalizadores"/>
+  <links id="pf13339729438691" target="pf13339729438713" source="pf13293303178756" outcome="cadastroTotalizadores"/>
+</pageflow:Pageflow>

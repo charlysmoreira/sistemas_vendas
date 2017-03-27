@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="fornecedorControleBean" />
+			<rich:panel header="Pesquisa Fornecedor" id="panel">
+				<rich:spacer height="10" />
+				
+				<h:panelGrid columns="2">
+				   <h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+					<h:inputText value="#{fornecedorControleBean.fornecedor.nome}" style=" width : 173px;"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<a:commandButton reRender="panel"
+							action="#{fornecedorControleBean.listaFornecedores}" value="Pesquisar" />
+					<a:commandButton action="#{fornecedorControleBean.novo}" value="Novo" />
+					 
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="100%" rows="10" id="tabela"
+					value="#{fornecedorControleBean.listaDeFornecedores}" border="1"
+					var="fornecedor">
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Fax" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.fax}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="CNPJ" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.cnpj}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Contato" style="FONT-WEIGHT: bold; " />
+						</f:facet>
+						<h:outputText value="#{fornecedor.contato}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Inscrição Estadual" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.inscEstadual}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Telefone" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.telefone}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Cep" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.cep}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Endereço" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.endereco}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Bairro" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.bairro}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Cidade" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.cidade}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Estado" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.estado}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Email" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{fornecedor.email}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{fornecedorControleBean.editar}" id="editar">
+							<f:param name="id" value="#{fornecedor.id}" />
+							<h:graphicImage value="/images/icons/editar.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+					
+					<rich:column>
+					<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:commandLink action="#{fornecedorControleBean.remover}" id="delete">
+						<f:param name="id" value="#{fornecedor.id}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0"></h:graphicImage>
+						</h:commandLink>
+						<rich:toolTip for="delete" value="Deletar" />
+					</rich:column>
+
+				</rich:dataTable>
+				<rich:datascroller align="left" for="tabela" maxPages="20"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="usuarioControleBean" />
+			<rich:panel header="Pesquisa Usuário" id="panel">
+				<rich:spacer height="10" />
+				<h:panelGrid columns="2">
+						<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						<h:inputText value="#{usuarioControleBean.usuario.nome}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+						<a:commandButton reRender="panel"
+							action="#{usuarioControleBean.listaUsuarios}" value="Pesquisar" />
+						<a:commandButton action="#{usuarioControleBean.novo}" value="Novo" />
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="483" rows="10" id="tabela"
+					value="#{usuarioControleBean.listaDeUsuarios}" border="1"
+					var="user" style=" width : 396px;">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{user.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Senha" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{user.senha}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{usuarioControleBean.editar}" id="editar">
+							<f:param name="id" value="#{user.id}" />
+							<h:graphicImage value="/images/icons/editar.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+					<rich:column>
+					<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:commandLink action="#{usuarioControleBean.remover}" id="delete">
+						<f:param name="id" value="#{user.id}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0"></h:graphicImage>
+						</h:commandLink>
+						<rich:toolTip for="delete" value="Deletar" />
+					</rich:column>
+
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header"> -->
+<!-- 							<h:outputText value="Editar" /> -->
+<!-- 						</f:facet> -->
+<!-- 						<h:commandLink  action="#{usuarioControleBean.editar}"  value="Editar"> -->
+<!-- 							<f:param name="id" value="#{user.id}" /> -->
+<!-- 						</h:commandLink> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header"> -->
+<!-- 							<h:outputText value="Remover" /> -->
+<!-- 						</f:facet> -->
+<!-- 						<h:commandLink action="#{usuarioControleBean.remover}"  value="Remover"> -->
+<!-- 							<f:param name="id" value="#{user.id}" /> -->
+<!-- 						</h:commandLink> -->
+<!-- 					</h:column> -->
+				</rich:dataTable>
+				<rich:datascroller align="left" for="tabela" maxPages="20"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

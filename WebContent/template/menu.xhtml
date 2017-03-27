@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:c="http://java.sun.com/jsf/core" 
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich" 
+		xmlns:h="http://java.sun.com/jsf/html">
+	
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="shortcut icon" href="#{request.contextPath}/images/iconLogo.png" />
+	<title>SFP</title>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/js/script.js"
+		language="javascript" />
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/js/jquery.maskedinput-1.2.2.js"
+		language="javascript" />
+</head>
+<body bgcolor="#E2EDFC">
+    
+	<ui:insert name="title">
+	<table width="100%" border="0">
+	<tr> 
+		<td style="width : 20px;">
+			<img src="#{facesContext.externalContext.requestContextPath}/images/logo.png" />
+	    </td>
+		<td 
+			style="font-weight: bold; font-size: 25px; COLOR: #008000;
+			font-family: sans-serif; width : left;">
+			SFP - SISTEMAS DE FORNECIMENTOS DE PRODUTOS
+	   </td>
+	</tr>
+</table>
+	</ui:insert>
+	<a4j:form>
+		<rich:toolBar>
+			<rich:dropDownMenu>
+				<c:facet name="label">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
+						style="vertical-align:middle">
+						<h:graphicImage value="/images/icons/cad.png"/>
+						<h:outputText value="Cadastos" style="FONT-SIZE: medium;"/>
+					</h:panelGrid>
+				</c:facet>
+				<rich:menuItem value="Usuários do Sistemas" action="listaUsuario"
+				icon="/images/icons/user.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+				<rich:menuSeparator id="menuSepara" />
+				<rich:menuGroup value="Produtos" style="FONT-SIZE: small;" icon="/images/icons/produ_icon.png">
+                    <rich:menuItem value="Produtos" action="listaProduto"
+					icon="/images/icons/prod.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+					<rich:menuItem value="Categorias" action="listaCategoria"
+					icon="/images/icons/cate.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+                <rich:menuSeparator id="menuSepara2" />
+                <rich:menuItem value="Marca" action="listaMarca"
+				icon="/images/icons/marca.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+				 <rich:menuSeparator id="menuSepara3" />
+                <rich:menuGroup value="Empresas" style="FONT-SIZE: small;" icon="/images/icons/emp_icon.png">
+                    <rich:menuItem value="Filiais" action="listaEmpresa"
+					icon="/images/icons/filial.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+					<rich:menuItem value="Transportadoras" action="listaTransportadora"
+					icon="/images/icons/trans.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+					<rich:menuItem value="Funcionários" action="listaVendedor"
+					icon="/images/icons/vendedor.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+					<rich:menuItem value="Tipo de Funcionário" action="listaTipo"
+					icon="/images/icons/tipo.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+                <rich:menuSeparator id="menuSepara4" />
+				<rich:menuItem value="Cidade" action="listaCidade"
+				icon="/images/icons/cidade.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+				 <rich:menuSeparator id="menuSepara5" />
+                <rich:menuGroup value="Clientes" style="FONT-SIZE: small;" icon="/images/icons/emp_icon.png">
+                   <rich:menuItem value="Fornecedor" action="listaFornecedor"
+					icon="/images/icons/clien.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+					<rich:menuItem value="Clientes" action="listaCliente"
+					icon="/images/icons/cliente_icon.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+                <rich:menuItem value="Serviços" action="listaServico"
+				icon="/images/icons/servico.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+			</rich:dropDownMenu>
+			
+			<rich:dropDownMenu>
+				<c:facet name="label">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
+						style="vertical-align:middle">
+						<h:graphicImage value="/images/icons/operacao.png"/>
+						<h:outputText value="Operações" style="FONT-SIZE: medium;"/>
+					</h:panelGrid>
+				</c:facet>
+				<rich:menuItem value="Vender Produto" action="cadastroPedido"
+					icon="/images/icons/pedido.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+				<rich:menuItem value="Caixa" action="cadastroCaixa"
+					icon="/images/icons/caixa.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+				<rich:menuGroup value="Relatórios" style="FONT-SIZE: small;" icon="/images/icons/reporte.png">
+                    <rich:menuItem value="Pedido" action="relatorioPedido"
+					icon="/images/icons/pedido_report.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+				<rich:menuItem value="Ordem de Serviço" action="cadastroOrdemServico"
+					icon="/images/icons/ordem.png" style="FONT-SIZE: small;">
+				</rich:menuItem>
+			</rich:dropDownMenu>
+			
+			<rich:dropDownMenu>
+				<c:facet name="label">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
+						style="vertical-align:middle">
+						<h:graphicImage value="/images/icons/financa.png"/>
+						<h:outputText value="Financeiro" style="FONT-SIZE: medium;"/>
+					</h:panelGrid>
+				</c:facet>
+				
+			</rich:dropDownMenu>
+			
+			<rich:dropDownMenu>
+				<c:facet name="label">
+					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
+						style="vertical-align:middle">
+						<h:graphicImage value="/images/icons/tools.png"/>
+						<h:outputText value="Acessórios" style="FONT-SIZE: medium;"/>
+					</h:panelGrid>
+				</c:facet>
+				<rich:menuGroup value="Configurações" style="FONT-SIZE: small;" icon="/images/icons/conf.png">
+                    <rich:menuItem value="Totalizadores" action="listaTotalizadores"
+					icon="/images/icons/taxa.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+				<rich:menuGroup value="Nota Fiscal Eletrônica" style="FONT-SIZE: small;" icon="/images/icons/reporte.png">
+                    <rich:menuItem value="Cadastro de CFOPs" action="cadastroNF"
+					icon="/images/icons/pedido_report.png" style="FONT-SIZE: small;">
+					</rich:menuItem>
+                </rich:menuGroup>
+			</rich:dropDownMenu>
+			
+			<rich:toolBarGroup location="right">
+				Seja bem vindo !! - ${usuarioControleBean.nome}
+               <a4j:commandLink action="#{usuarioControleBean.sair}"  value="Sair" style="COLOR: #E95A5A; font-size: 13px;"/>
+            </rich:toolBarGroup>
+		</rich:toolBar>
+	</a4j:form>
+	<rich:panel>
+		<ui:insert name="body"></ui:insert>
+		<ui:insert name="pesqModalBlock"></ui:insert>
+	</rich:panel>
+</body>
+</html>

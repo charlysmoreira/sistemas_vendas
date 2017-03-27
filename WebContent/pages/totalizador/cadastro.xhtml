@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	<ui:define name="body">
+		<rich:panel header="Cadastro de Totalizadores">
+			<h:form>
+				<rich:messages layout="table" tooltip="true" showDetail="false"
+					showSummary="true">
+					<f:facet name="errorMarker">
+						<h:graphicImage url="/images/attencion.png" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage url="/images/infor.png" />
+					</f:facet>
+				</rich:messages>
+				<rich:spacer width="1" height="15" />
+				<a:keepAlive beanName="totalizadoresControlerBean" />
+				<a:loadScript src="/pluguin/geralJs.js" />
+				<h:panelGrid columns="5">
+				 <h:outputText value="Total Bc Icms" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Icms" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Bc Icms St" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Icms St" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Bruto de Produto" style="FONT-SIZE: small;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalBcIcms}" style=" width : 178px;"/>	
+			     <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalIcms}" style=" width : 178px;"/>	
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalBcIcmsSt}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalIcmsSt}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalBrutoProduto}" style=" width : 178px;"/>	
+				 <h:outputText value="Total de Frete" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total de Seguro" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total de Desconto" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total de Ii" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total de Ipi" style="FONT-SIZE: small;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalFrete}" style=" width : 178px;"/>	
+			     <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalSeguro}" style=" width : 178px;"/>	
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalDesconto}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalIi}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalIpi}" style=" width : 178px;"/>
+				 <h:outputText value="Total Pis" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Pis St" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Cofins" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Cofins St" style="FONT-SIZE: small;"/>
+				 <h:outputText value="Total Outras Despesas" style="FONT-SIZE: small;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalPis}" style=" width : 178px;"/>	
+			     <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalPisSt}" style=" width : 178px;"/>	
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalCofins}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalCofinsSt}" style=" width : 178px;"/>
+				 <h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalOutrasDespesas}" style=" width : 178px;"/>
+				</h:panelGrid> 
+				<h:panelGrid columns="2">
+				    <h:panelGrid>
+					<h:outputText value="Total de NF" style="FONT-SIZE: small;"/>
+					<h:inputText onkeypress="return apenasNumero(event)"
+						value="#{totalizadoresControlerBean.totalizadores.totalNf}" style=" width : 178px;"/>
+					</h:panelGrid>
+				<h:panelGrid columns="2">
+				<h:selectBooleanCheckbox value="#{totalizadoresControlerBean.totalizadores.retencaoDeImposto}">
+					</h:selectBooleanCheckbox>
+					<h:outputText value="Informar retenção de imposto" style="FONT-SIZE: small;"/>
+				</h:panelGrid>
+				</h:panelGrid>
+				<rich:spacer width="1" height="25" />
+				<h:commandButton action="#{totalizadoresControlerBean.salvar}" value="Salvar" />
+				<h:commandButton immediate="true" action="listaTotalizadores" value="Voltar" style=" width : 59px;"/>
+				 
+			</h:form>
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>

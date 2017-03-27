@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	<ui:define name="titulo">
+		<h1>
+			<h:outputText value="Cadastro de Empresa" style="COLOR: #0080c0;" />
+		</h1>
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<a:keepAlive beanName="empresaControleBean" />
+			<a:loadScript src="/pluguin/geralJs.js" />
+			<a:loadScript src="/pluguin/mascaraMonetaria.js" />
+			
+			<rich:panel header="Cadastro de Empresa">
+				<rich:messages layout="table" tooltip="true" showDetail="false"
+					showSummary="true">
+					<f:facet name="errorMarker">
+						<h:graphicImage url="/images/attencion.png" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage url="/images/infor.png" />
+					</f:facet>
+				</rich:messages>
+				<h:panelGrid columns="2">
+					<h:outputText value="Nome" style="FONT-SIZE: small;"/>
+					<h:outputText value="Email" style="FONT-SIZE: small;"/>
+					<h:inputText required="true" requiredMessage="Nome é obrigatorio"
+						onkeypress="return somente_txt(event)"
+						value="#{empresaControleBean.empresa.nome}" style=" width : 178px;" />
+						
+					<h:inputText required="true" requiredMessage="Email é obrigatorio"
+						value="#{empresaControleBean.empresa.email}" style=" width : 178px;" />
+					
+					<h:outputText value="Logradouro" style="FONT-SIZE: small;"/>
+					<h:outputText value="Cidade" style="FONT-SIZE: small;"/>
+					<h:inputText required="true" requiredMessage="Logradouro é obrigatorio"
+						value="#{empresaControleBean.empresa.logradouro}" style=" width : 178px;" />
+						
+					<h:inputText required="true" requiredMessage="Cidade é obrigatorio"
+						value="#{empresaControleBean.empresa.cidade}" style=" width : 178px;" />
+						
+					<h:outputText value="Complemento" style="FONT-SIZE: small;"/>
+					<h:outputText value="CPF/CNPJ" style="FONT-SIZE: small;"/>
+					<h:inputText required="true" requiredMessage="Complemento é obrigatorio"
+						onkeypress="return somente_txt(event)"
+						value="#{empresaControleBean.empresa.complemento}" style=" width : 178px;" />
+					
+					<h:inputText required="true" requiredMessage="CPF/CNPJ é obrigatorio"
+						onkeypress="mascaraTexto(event,'99.999.999/9999-99')" maxlength="18"
+						value="#{empresaControleBean.empresa.cpfCnpj}" style=" width : 178px;" />
+					
+					<h:outputText value="CEP" style="FONT-SIZE: small;"/>
+					<h:outputText value="Numero" style="FONT-SIZE: small;"/>
+					<h:inputText required="true" requiredMessage="CEP é obrigatorio"
+						onkeypress="formatar_mascara(this, '#####-###')" maxlength="9"
+						value="#{empresaControleBean.empresa.cep}" style=" width : 178px;" />
+					
+					<h:inputText required="true" requiredMessage="Número é obrigatorio"
+						onkeypress="return apenasNumero(event)"
+						value="#{empresaControleBean.empresa.numero}" style=" width : 178px;" />
+					 
+					<h:outputText value="Estado" style="FONT-SIZE: small;"/>
+					<h:outputText value="Bairro" style="FONT-SIZE: small;"/>
+					<h:selectOneMenu value="#{empresaControleBean.empresa.estado}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{empresaControleBean.listaDeEstados}"/>
+					</h:selectOneMenu>
+					<h:inputText value="#{empresaControleBean.empresa.bairro}" style=" width : 178px;" />
+				</h:panelGrid>
+				
+				<rich:spacer height="30" />
+					<rich:simpleTogglePanel switchType="client" id="formFilial" opened="false" label="Cadastro de Filiais" >
+         				 <a:region> 
+         				   <h:panelGrid columns="2">
+							<h:outputText value="Nome" style="FONT-SIZE: small;"/>
+							<h:outputText value="Cidade" style="FONT-SIZE: small;"/>
+							<h:inputText onkeypress="return somente_txt(event)"
+								value="#{empresaControleBean.filial.nome}" style=" width : 178px;" />
+							<h:inputText value="#{empresaControleBean.filial.cidade}" style=" width : 178px;" />
+						
+							<h:outputText value="Bairro" style="FONT-SIZE: small;"/>
+							<h:outputText value="Complemento" style="FONT-SIZE: small;"/>
+							<h:inputText value="#{empresaControleBean.filial.bairro}" style=" width : 178px;" />
+							<h:inputText value="#{empresaControleBean.filial.complemento}" style=" width : 178px;" />
+					
+							<h:outputText value="CPF/CNPJ" style="FONT-SIZE: small;"/>
+							<h:outputText value="Escricao Estadual" style="FONT-SIZE: small;"/>
+							<h:inputText onkeypress="mascaraTexto(event,'99.999.999/9999-99')" maxlength="18"
+								value="#{empresaControleBean.filial.cnpjCpf}" style=" width : 178px;" />
+							<h:inputText onkeypress="return apenasNumero(event)"
+								value="#{empresaControleBean.filial.inscricaoEstadual}" style=" width : 178px;" />
+					
+							<h:outputText value="CEP" style="FONT-SIZE: small;"/>
+							<h:outputText value="Numero" style="FONT-SIZE: small;"/>
+							<h:inputText onkeypress="formatar_mascara(this, '#####-###')" maxlength="9"
+								value="#{empresaControleBean.filial.cep}" style=" width : 178px;" />
+							<h:inputText onkeypress="return apenasNumero(event)"
+								value="#{empresaControleBean.filial.numero}" style=" width : 178px;" />
+					        
+					        <h:outputText value="Estado" style="FONT-SIZE: small;"/>
+					        <h:outputText value="Endereco" style="FONT-SIZE: small;"/>
+							<h:selectOneMenu value="#{empresaControleBean.filial.estado}" style=" width : 178px;">
+						 		<f:selectItems 
+						    		 value="#{empresaControleBean.listaDeEstados}" />
+							</h:selectOneMenu>
+							<h:inputText value="#{empresaControleBean.filial.endereco}" style=" width : 178px;" />
+					         
+						</h:panelGrid>
+						 <a:commandButton action="#{empresaControleBean.salvarFilial}"
+								value="Salvar Filial" reRender="formFilial" />
+						<rich:spacer height="20" />
+						
+						<rich:dataTable value="#{empresaControleBean.empresa.filiais}"
+							var="filial" rowKeyVar="formFilial" width="100%">
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Nome" />
+								</f:facet>
+								<h:outputText value="#{filial.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Cidade" />
+								</f:facet>
+								<h:outputText value="#{filial.cidade}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Bairro" />
+								</f:facet>
+								<h:outputText value="#{filial.bairro}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="CEP" />
+								</f:facet>
+								<h:outputText value="#{filial.cep}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="CPF/CNPJ" />
+								</f:facet>
+								<h:outputText value="#{filial.cnpjCpf}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Complemento" />
+								</f:facet>
+								<h:outputText value="#{filial.complemento}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Estado" />
+								</f:facet>
+								<h:outputText value="#{filial.estado}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Numero" />
+								</f:facet>
+								<h:outputText value="#{filial.numero}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Endereco" />
+								</f:facet>
+								<h:outputText value="#{filial.endereco}" />
+							</h:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<a:commandLink action="#{empresaControleBean.editarFilial}"
+									id="editar">
+									<f:param name="id" value="#{filial.id}" />
+									<h:graphicImage value="/images/icons/editar.png"
+										style="border:0"></h:graphicImage>
+								</a:commandLink>
+								<rich:toolTip for="editar" value="Editar" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:commandLink action="#{empresaControleBean.removerFilial}"
+									id="delete">
+									<f:param name="id" value="#{filial.id}" />
+									<h:graphicImage value="/images/icons/excluir.png"
+										style="border:0"></h:graphicImage>
+								</h:commandLink>
+								<rich:toolTip for="delete" value="Deletar" />
+							</rich:column>
+						</rich:dataTable>
+						</a:region>  
+   				 </rich:simpleTogglePanel> 
+			</rich:panel>
+			<rich:spacer width="1" height="25" />
+			<h:commandButton action="#{empresaControleBean.salvar}" value="Salvar" />
+			<h:commandButton immediate="true" action="listaEmpresa" value="Voltar" style=" width : 59px;"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

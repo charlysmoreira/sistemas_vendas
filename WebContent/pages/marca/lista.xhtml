@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="marcaControleBean" />
+			<rich:panel header="Pesquisa Marca" id="panel">
+				<rich:spacer height="10" />
+				<h:panelGrid columns="2">
+						<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						<h:inputText value="#{marcaControleBean.marca.nome}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+						<a:commandButton reRender="panel"
+							action="#{marcaControleBean.listaMarcas}" value="Pesquisar" />
+						<a:commandButton action="#{marcaControleBean.novo}"  value="Novo" />
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="100%" rows="10" id="tabela"
+					value="#{marcaControleBean.listaDeMarcas}" border="1"
+					var="marca" >
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{marca.nome}" />
+					</rich:column>
+					 
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{marcaControleBean.editar}" id="editar">
+							<f:param name="id" value="#{marca.id}" />
+							<h:graphicImage value="/images/icons/editar.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+					
+				</rich:dataTable>
+				<rich:datascroller align="left" for="tabela" maxPages="20"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

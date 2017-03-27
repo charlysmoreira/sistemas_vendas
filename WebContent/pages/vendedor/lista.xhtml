@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="vendedorControleBean" />
+			<rich:panel header="Pesquisa Vendedor" id="panel">
+				<rich:spacer height="10" />
+				
+				<h:panelGrid columns="2">
+				   <h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+					<h:inputText value="#{vendedorControleBean.vendedor.nome}" style=" width : 173px;"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<a:commandButton reRender="panel"
+							action="#{vendedorControleBean.listaVendedores}" value="Pesquisar" />
+					<a:commandButton action="#{vendedorControleBean.novo}" value="Novo" />
+					 
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="100%" rows="10" id="tabela"
+					value="#{vendedorControleBean.listaDeVendedores}" border="1"
+					var="vendedor">
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Codigo" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.codigo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="CPF/CNPJ" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.cpfCnpj}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Apelido" style="FONT-WEIGHT: bold; " />
+						</f:facet>
+						<h:outputText value="#{vendedor.apelido}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="RG Insc" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.rgInsc}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Telefone" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.telefone}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Tipo" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.tipo.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Filial" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.filial.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Cep" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.cep}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Endereço" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.endereco}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Bairro" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.bairro}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Cidade" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.cidade.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Estado" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.estado}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Número Conta" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.numeroConta}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Email" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{vendedor.email}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{vendedorControleBean.editar}" id="editar">
+							<f:param name="id" value="#{vendedor.id}" />
+							<h:graphicImage value="/images/icons/editar.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+					
+					<rich:column>
+					<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:commandLink action="#{vendedorControleBean.remover}" id="delete">
+						<f:param name="id" value="#{vendedor.id}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0"></h:graphicImage>
+						</h:commandLink>
+						<rich:toolTip for="delete" value="Deletar" />
+					</rich:column>
+
+				</rich:dataTable>
+				<rich:datascroller align="left" for="tabela" maxPages="20"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

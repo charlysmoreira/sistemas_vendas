@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	<ui:define name="body">
+		<rich:panel header="Caixa">
+			<h:form>
+			<a:keepAlive beanName="caixaControlerBean" />
+			<a:loadScript src="/pluguin/mascaraMonetaria.js" />
+			<a:loadScript src="/pluguin/geralJs.js" />
+			<h:panelGrid columns="2">
+			<h:panelGrid >
+				<h:panelGrid columns="2">
+					<h:outputText value="Caixa" style="FONT-SIZE: small;" />
+					<h:outputText value="Funcionário" style="FONT-SIZE: small;" />
+					 <h:selectOneMenu
+							value="#{caixaControlerBean.caixa.caixa}"
+							converter="vendedorConverter" style=" width : 146px;">
+							<f:selectItem itemLabel="Selecionar" />
+							<f:selectItems value="#{caixaControlerBean.caixas}" />
+					</h:selectOneMenu>
+					 <h:selectOneMenu
+							value="#{caixaControlerBean.caixa.funcionario}"
+							converter="vendedorConverter" style=" width : 146px;">
+							<f:selectItem itemLabel="Selecionar" />
+							<f:selectItems value="#{caixaControlerBean.funcinarios}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Número do Pedido" style="FONT-SIZE: small;"/>
+						<h:inputText onkeypress="return apenasNumero(event)" maxlength="18"
+						value="#{caixaControlerBean.numeroPedido}" style=" width : 136px;"/>
+					 
+					<h:commandButton action="#{caixaControlerBean.pesquisaPorNumero}" value="Pesquisar Pedido" />
+				</h:panelGrid>
+				<rich:dataTable width="400px" rows="10" id="tabelaCaixa" value="#{caixaControlerBean.listaPesquisaPorNumero}" border="1"
+					var="caixa">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Produto" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{caixa.nomeProduto}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Valor Unitário" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{caixa.valorProduto}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Quantidade" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:inputText id="addQuant" value="#{caixa.quantidadeProduto}" 
+						      onkeypress="return apenasNumero(event)"
+							   onkeydown="setaFoco(this,event)">
+						  <a:support ajaxSingle="true" event="onchange"
+						        action="#{caixaControlerBean.calcular()}" reRender="addQuant,panelTotal,tabelaCaixa"/>
+						</h:inputText>
+					</rich:column>
+					 <rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Parcial" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{caixa.totalParcial}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink
+							action="#{caixaControlerBean.removerProdutoPedido}"
+							id="deleteProdutoCaixa" reRender="tabelaCaixa">
+							<f:setPropertyActionListener value="#{caixa}"
+								target="#{caixaControlerBean.produtoCaixa}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="deleteProdutoCaixa" value="Remover Item" />
+					</rich:column>
+					<h:outputText value="Total da Venda R$:" />
+					<h:outputText value="#{caixaControlerBean.total}" />
+				</rich:dataTable>
+			</h:panelGrid>
+			<rich:panel header="Calcular Venda" id="panelTotal">
+			 <h:panelGrid columns="2">
+        	 	<h:outputLabel value="Total R$:" style="FONT-SIZE: small;"/>
+				<h:inputText onkeyup="formataValor(this,event);" maxlength="18"
+					converter="#{DoubleConverter}" value="#{caixaControlerBean.total}"
+				    style=" width : 136px;"/>
+				<h:outputLabel value="Valor Pago R$:" style="FONT-SIZE: small;"/>
+				<h:inputText onkeyup="formataValor(this,event);" maxlength="18"
+				    onkeypress="return apenasNumero(event)" onkeydown="setaFoco(this,event)"
+					converter="#{DoubleConverter}" value="#{caixaControlerBean.valorPago}">
+				<a:support ajaxSingle="true" event="onchange"
+						 action="#{caixaControlerBean.calcularVenda()}" reRender="panelTotal"/>
+				</h:inputText>
+				<h:outputLabel value="Troco R$:" style="FONT-SIZE: small;"/>
+				<h:inputText onkeyup="formataValor(this,event);" maxlength="18"
+						converter="#{DoubleConverter}" value="#{caixaControlerBean.troco}"
+					    style=" width : 136px;"/>
+			 </h:panelGrid>
+			</rich:panel>
+			</h:panelGrid>
+				<rich:spacer width="1" height="15" />
+				 <rich:separator height="2" lineType="solid" />
+				<rich:spacer width="1" height="25" />
+				<h:commandButton action="#{caixaControlerBean.salvar}" value="Confirmar Venda" reRender="tabelaCaixa,panelTotal" />
+				<rich:spacer width="1" height="25" />
+				<h:messages/>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>

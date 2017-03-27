@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	<ui:define name="titulo">
+		<h1>
+			<h:outputText value="Cadastro de Técnico" style="COLOR: #0080c0;" />
+		</h1>
+	</ui:define>
+	<ui:define name="body">
+		<rich:panel header="Cadastro de Técnico">
+			<h:form>
+			<a:keepAlive beanName="tecnicoControleBean" />
+			<a:loadScript src="/pluguin/geralJs.js" />
+				<h:panelGrid columns="2">
+				
+					<h:outputText value="Código" style="FONT-SIZE: small;"/>
+					<h:outputText value="Nome" style="FONT-SIZE: small;"/>
+					<h:inputText required="true" requiredMessage="Código é obrigatorio"
+						value="#{tecnicoControleBean.tecnico.codigo}" style=" width : 178px;" />
+					<h:inputText required="true" requiredMessage="Nome é obrigatorio"
+						onkeypress="return somente_txt(event)"
+						value="#{tecnicoControleBean.tecnico.nome}" style=" width : 178px;" />
+				</h:panelGrid>
+				<rich:spacer width="1" height="25" />
+				<h:commandButton action="#{tecnicoControleBean.salvar}" value="Salvar" />
+				<h:commandButton immediate="true" action="listaTecnico" value="Voltar" style=" width : 59px;"/>
+				<h:messages/>
+			</h:form>
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>

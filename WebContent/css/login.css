@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+.login{
+	background-image: url("../images/login.png");
+    background-position: 34px 50%;
+    background-repeat: no-repeat;
+    font-size: 18px;
+    height: 201px;
+    margin-left: 185px;
+    margin-top: -185px;
+    padding-top: 120px;
+    
+}
+#templateLogin {
+    background-color: #E2EDFC;
+    background-position: 0 -21px;
+    display: block;
+    height: auto;
+    overflow: auto;
+    padding: 358px 0;
+    position: relative;
+    width: 100%;
+}
+#largura{
+	width:960px;
+	margin: 0 auto;
+			
+}

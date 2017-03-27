@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="totalizadoresControlerBean" />
+			<rich:panel header="Lista Totalizadores" id="panel">
+				<rich:spacer height="10" />
+				<h:panelGrid columns="2">
+					<a:commandButton reRender="panel"
+							action="#{totalizadoresControlerBean.listaTotalizadores}" value="Pesquisar" />
+					<a:commandButton action="#{totalizadoresControlerBean.novo}" value="Novo" />
+					 
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="100%" rows="10" id="tabela"
+					value="#{totalizadoresControlerBean.listaDeTotalizadores}" border="1"
+					var="total">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Bc Icms" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalBcIcms}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Icms" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalIcms}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Bc Icms St" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalBcIcmsSt}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Icms St" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalIcmsSt}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Bruto de Produto" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalBrutoProduto}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total de Frete" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalFrete}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total de Seguro" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalSeguro}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total de Desconto" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalDesconto}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="otal de Ii" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalIi}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total de Ipi" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalIpi}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Pis" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalPis}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Pis St" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalPisSt}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Cofins" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalCofins}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Cofins St" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalCofinsSt}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Outras Despesas" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalOutrasDespesas}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total de NF" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.totalNf}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Informar retenção de imposto" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{total.retencaoDeImposto == true ? 'Sim' : 'Não'}"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{totalizadoresControlerBean.editar}"
+										id="editarTotal" reRender="tabela">
+								<f:setPropertyActionListener value="#{total}" target="#{totalizadoresControlerBean.totalizadores}"/>
+								<h:graphicImage value="/images/icons/editar.png"
+											style="border:0">
+								</h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+
+				</rich:dataTable>
+				<rich:datascroller align="left" for="tabela" maxPages="3"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

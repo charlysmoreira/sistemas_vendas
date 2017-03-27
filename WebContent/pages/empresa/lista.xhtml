@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="empresaControleBean" />
+			<rich:panel header="Pesquisa Empresa" id="panel">
+				<rich:spacer height="10" />
+				<h:panelGrid columns="4">
+					<h:column>
+						<h:inputText id="ln"
+							value="#{empresaControleBean.empresa.nome}" />
+					</h:column>
+					<h:column>
+						<a:commandButton reRender="panel"
+							action="#{empresaControleBean.listaEmpresas}" value="Pesquisar" />
+					</h:column>
+					<h:column>
+						<a:commandButton action="#{empresaControleBean.novo}" value="Novo" />
+					</h:column>
+				</h:panelGrid>
+				<rich:spacer height="10" />
+				<rich:dataTable width="100%" rows="10" id="tabela"
+					value="#{empresaControleBean.listaDeEmpresas}" border="1"
+					var="empresa" >
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{empresa.nome}" />
+					</rich:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Cidade" />
+						</f:facet>
+						<h:outputText value="#{empresa.cidade}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Logradouro" />
+						</f:facet>
+						<h:outputText value="#{empresa.logradouro}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="CEP" />
+						</f:facet>
+						<h:outputText value="#{empresa.cep}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="CPF/CNPJ" />
+						</f:facet>
+						<h:outputText value="#{empresa.cpfCnpj}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Complemento" />
+						</f:facet>
+						<h:outputText value="#{empresa.complemento}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Estado" />
+						</f:facet>
+						<h:outputText value="#{empresa.estado}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Numero" />
+						</f:facet>
+						<h:outputText value="#{empresa.numero}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputFormat value="Bairro" />
+						</f:facet>
+						<h:outputText value="#{empresa.bairro}" />
+					</h:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Filial" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{empresaControleBean.modalFilial}" id="fil" reRender="tableModal">
+							<f:param name="id" value="#{empresa.id}" />
+							<h:graphicImage value="/images/icons/fil.png"
+								style="border:0"></h:graphicImage>
+						<rich:componentControl for="modal" event="onclick" operation="show" />  
+						</a:commandLink>
+						<rich:toolTip for="fil" value="Visualizar Filial" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{empresaControleBean.editarEmpresa}" id="editar">
+							<f:param name="id" value="#{empresa.id}" />
+							<h:graphicImage value="/images/icons/editar.png"
+								style="border:0"></h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="editar" value="Editar" />
+					</rich:column>
+					
+					<rich:column>
+					<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:commandLink action="#{empresaControleBean.removerEmpresa}" id="delete">
+						<f:param name="id" value="#{empresa.id}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0"></h:graphicImage>
+						</h:commandLink>
+						<rich:toolTip for="delete" value="Deletar" />
+					</rich:column>
+				</rich:dataTable>
+				
+				<rich:modalPanel id="modal" width="895" height="300">
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="Filial da Empresa Selecionada"></h:outputText>
+						</h:panelGroup>
+					</f:facet>
+					<f:facet name="controls">
+						<h:panelGroup>
+							 <h:outputText value="[X]" style="cursor: pointer" styleClass="hidelink" id="hidelink" />
+							<rich:componentControl for="modal" attachTo="hidelink"
+								operation="hide" event="onclick" />
+						</h:panelGroup>
+					</f:facet>
+				     <rich:dataTable value="#{empresaControleBean.empresa.filiais}"
+							var="filial" id="tableModal" width="100%">
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Nome" />
+								</f:facet>
+								<h:outputText value="#{filial.nome}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Cidade" />
+								</f:facet>
+								<h:outputText value="#{filial.cidade}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Bairro" />
+								</f:facet>
+								<h:outputText value="#{filial.bairro}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="CEP" />
+								</f:facet>
+								<h:outputText value="#{filial.cep}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="CPF/CNPJ" />
+								</f:facet>
+								<h:outputText value="#{filial.cnpjCpf}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Complemento" />
+								</f:facet>
+								<h:outputText value="#{filial.complemento}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Estado" />
+								</f:facet>
+								<h:outputText value="#{filial.estado}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Numero" />
+								</f:facet>
+								<h:outputText value="#{filial.numero}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputFormat value="Endereco" />
+								</f:facet>
+								<h:outputText value="#{filial.endereco}" />
+							</h:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Editar" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<a:commandLink action="#{empresaControleBean.editarFilial}"
+									id="editar">
+									<f:param name="id" value="#{filial.id}" />
+									<h:graphicImage value="/images/icons/editar.png"
+										style="border:0"></h:graphicImage>
+								</a:commandLink>
+								<rich:toolTip for="editar" value="Editar" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+								</f:facet>
+								<h:commandLink action="#{empresaControleBean.removerFilial}"
+									id="delete">
+									<f:param name="id" value="#{filial.id}" />
+									<h:graphicImage value="/images/icons/excluir.png"
+										style="border:0"></h:graphicImage>
+								</h:commandLink>
+								<rich:toolTip for="delete" value="Deletar" />
+							</rich:column>
+						</rich:dataTable>
+				</rich:modalPanel>
+				
+				<rich:datascroller align="left" for="tabela" maxPages="20"
+					reRender="panel" />
+				<rich:spacer height="30" />
+				<h:messages/>
+			</rich:panel>
+		</a:form>
+	</ui:define>
+</ui:composition>

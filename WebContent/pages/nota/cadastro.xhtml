@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+     		 	
+	 
+	<ui:define name="body">
+		<rich:panel header="Nota Fiscal Eletrônica">
+		<h:form>
+		<a:keepAlive beanName="notaFiscalEletronicaControlerBean" />
+		<a:loadScript src="/pluguin/geralJs.js" />
+			<h:outputText value="Dados que geralmente não mudam" style="FONT-SIZE: small; FONT-WEIGHT: bold;" />
+					<rich:panel bodyClass="rich-laguna-panel-no-header">
+						<h:outputText value="Dados do Emitente" style="FONT-SIZE: small; FONT-WEIGHT: bold;" />
+						<h:panelGrid columns="4">
+						<h:outputText value="Cnpj:" style="FONT-SIZE: small;" />
+						<h:outputText value="#{notaFiscalEletronicaControlerBean.empresa.cpfCnpj}"/>
+						<h:outputText value="Razão:" style="FONT-SIZE: small;" />
+						<h:outputText value="#{notaFiscalEletronicaControlerBean.empresa.nome}"/>
+						<h:outputText value="Endereço:" style="FONT-SIZE: small;" />
+						<h:outputText value="#{notaFiscalEletronicaControlerBean.empresa.logradouro}"/>
+						<h:outputText value="Bairro:" style="FONT-SIZE: small;" />
+						<h:outputText value="#{notaFiscalEletronicaControlerBean.empresa.bairro}"/>
+						<h:outputText value="Razão" style="FONT-SIZE: small;" />
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.estado}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaDeEstados}"/>
+						</h:selectOneMenu>
+						</h:panelGrid>
+					</rich:panel> 
+					<rich:spacer height="10" />
+			    <rich:panel header="Dados gerais">
+			    <h:panelGrid columns="2">
+					<h:panelGrid columns="3">
+						<h:outputText value="Numero da NFe" style="FONT-SIZE: small;" />
+						<h:outputText value="Serie das Notas" style="FONT-SIZE: small;" />
+						<h:outputText value="Natureza da Operação" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.numeroNFe}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.serieNotas}"/>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.naturezaVenda}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaNaturezaVena}"/>
+						</h:selectOneMenu>
+						<h:outputText value="Forma de Pagamento" style="FONT-SIZE: small;" />
+						<h:outputText value="Tipo de Operação" style="FONT-SIZE: small;" />
+						<h:outputText value="Finalidade de Emiossão" style="FONT-SIZE: small;" />
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.pagamento}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaFormDePag}"/>
+						</h:selectOneMenu>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.tipoOperacao}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaTipoOperacao}"/>
+						</h:selectOneMenu>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.finalidadeEmissao}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaFinalidadeMissao}"/>
+						</h:selectOneMenu>
+						<h:outputText value="Data da EmissÃ£o NF" style="FONT-SIZE: small;" />
+						<h:outputText value="Data de Saida/Entrada" style="FONT-SIZE: small;" />
+						<h:outputText value="Hora Saida/Entrada" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.data}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.data}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.hora}"/>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+					    <h:outputText value="Data da EmissÃ£o NF" style="FONT-SIZE: small;" />
+					   <h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.tipoEmissao}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaFinalidadeMissao}"/>
+						</h:selectOneMenu>
+					    <h:selectBooleanCheckbox value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.NFReferenciada}">
+					    </h:selectBooleanCheckbox>
+					     <h:outputText value="Possue NF Referenciada" />
+					</h:panelGrid>
+				</h:panelGrid>
+			   </rich:panel>
+			<rich:spacer width="1" height="25" />
+			<rich:panel header="Dados do Destinatário">
+			    <h:panelGrid columns="2">
+					<h:panelGrid columns="5">
+						<h:outputText value="Razão/Nome destinatário" style="FONT-SIZE: small;" />
+						<h:outputText value="Cnpj/Cpf" style="FONT-SIZE: small;" />
+						<h:outputText value="Telefone" style="FONT-SIZE: small;" />
+						<h:outputText value="Email" style="FONT-SIZE: small;" />
+						<h:outputText value="Ins.Estad.Subs.Trib." style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.nomeDestinatario}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.cpfCnpjDestinatario}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.telefoneDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.emailDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.inscrDest}"/>
+						<h:outputText value="Logadouro" style="FONT-SIZE: small;" />
+						<h:outputText value="Número" style="FONT-SIZE: small;" />
+						<h:outputText value="Complemento" style="FONT-SIZE: small;" />
+						<h:outputText value="Bairro" style="FONT-SIZE: small;" />
+						<h:outputText value="Cep" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.logradouroDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.numeroDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.complementoDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.bairroDest}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.cepDest}"/>
+						<h:outputText value="Estado" style="FONT-SIZE: small;" />
+						<h:outputText value="Municipio" style="FONT-SIZE: small;" />
+						<h:outputText value="Insc. Estadual" style="FONT-SIZE: small;" />
+						<h:outputText value="Insc.Suframa" style="FONT-SIZE: small;" />
+						<h:selectBooleanCheckbox value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.endereroDeEntregaDiferente}">
+					    </h:selectBooleanCheckbox>
+					    <h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.estado}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaDeEstados}"/>
+						</h:selectOneMenu>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.municipio}" converter="tipoConverter" style=" width : 110px;">
+							<f:selectItem itemLabel="Selecionar" />
+							<f:selectItems value="#{notaFiscalEletronicaControlerBean.listaDeCidades}" />
+					    </h:selectOneMenu>
+					    <h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.inscricaoEstadual}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.inscricaoSufruma}"/>
+						<h:outputText value="Endereço de Entrega diferente" style="FONT-SIZE: small;" />
+					</h:panelGrid>
+				</h:panelGrid>
+			   </rich:panel>
+			   <h:panelGrid columns ="2">
+			   <h:outputText value="Lista de Produtos" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+			  	 <a:region> 
+					<h:outputLink value="#" id="linkAddProduto">
+       						Pesquisa Produto
+        				<rich:componentControl for="modalAddProduto" attachTo="linkAddProduto" operation="show" event="onclick"/>
+   					</h:outputLink>
+   				 </a:region> 
+   				</h:panelGrid>
+   			<a:region> 
+			   <rich:dataTable width="100%" rows="10" id="tabelaProdutoNF"
+					value="#{notaFiscalEletronicaControlerBean.listaDeProdutoTONf}" border="1"
+					var="produto">
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Código" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{produto.codigo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{produto.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Valor Unitário" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{produto.valorUnitario}" />
+					</rich:column>
+					 <rich:column>
+						<f:facet name="header">
+							<h:outputText value="Quantidade" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{produto.quantidade}" />
+					</rich:column>
+					 <rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Bruto" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{produto.valorTotal}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Remover" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<a:commandLink action="#{notaFiscalEletronicaControlerBean.removerProdutoNF}" id="deleteProdutoNF" reRender="tabelaProdutoNF">
+							<f:setPropertyActionListener value="#{produto}"
+										target="#{notaFiscalEletronicaControlerBean.produtoNF}" />
+							<h:graphicImage value="/images/icons/excluir.png"
+								style="border:0">
+							</h:graphicImage>
+						</a:commandLink>
+						<rich:toolTip for="deleteProdutoNF" value="Deletar" />
+					</rich:column>
+				</rich:dataTable>
+				</a:region> 
+				<rich:spacer width="1" height="25" />
+				<h:outputText value="Totalizadores" style="FONT-SIZE: small; FONT-WEIGHT: bold;" />
+				<rich:spacer width="1" height="25" />
+				<rich:panel bodyClass="rich-laguna-panel-no-header">
+				<h:panelGrid columns="5">
+						<h:outputText value="Total BC ICMS" style="FONT-SIZE: small;" />
+						<h:outputText value="Total ICMS" style="FONT-SIZE: small;" />
+						<h:outputText value="Total BC ICMS ST" style="FONT-SIZE: small;" />
+						<h:outputText value="Total ICMS ST" style="FONT-SIZE: small;" />
+						<h:outputText value="Total bruto de Produtos" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalBcIcms}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalIcms}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalBcIcmsSt}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalIcmsSt}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalBrutoProduto}"/>
+						<h:outputText value="Total de Frete" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de Seguro" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de desconto" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de II" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de IPI" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalFrete}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalSeguro}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalDesconto}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalIi}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalIpi}"/>
+						<h:outputText value="Total de PIS" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de PIS ST" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de COFINS" style="FONT-SIZE: small;" />
+						<h:outputText value="Total de COFINS ST" style="FONT-SIZE: small;" />
+						<h:outputText value="Total Outras Despesas" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalPis}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalPisSt}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalCofins}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalCofinsSt}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalOutrasDespesas}"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+						<h:outputText value="Total da NF" style="FONT-SIZE: small;" />
+						<h:selectBooleanCheckbox value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.retencaoDeImposto}">
+					    </h:selectBooleanCheckbox>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.notaFiscalEletronica.totalNf}"/>
+						<h:outputText value="Informar Retenções de Impostos" style="FONT-SIZE: small;" />
+				</h:panelGrid>
+				</rich:panel>
+			 </h:form>
+		</rich:panel>
+		
+			<rich:modalPanel id="modalAddProduto" width="985" height="300">
+				<f:facet name="header">
+					<h:panelGroup>
+						<h:outputText value="Produto"/>
+					</h:panelGroup>
+				</f:facet>
+				<f:facet name="controls">
+					<h:panelGroup>
+						<h:outputText value="[X]" style="cursor: pointer"
+							styleClass="hidelink" id="hidelinkProduto" />
+						<rich:componentControl for="modalAddProduto"
+							attachTo="hidelinkProduto" operation="hide" event="onclick" />
+					</h:panelGroup>
+				</f:facet>
+				<a:form>
+				<rich:spacer height="10" />
+				<h:panelGrid columns="7" id="gridProduto">
+						<h:outputText value="Nome do Produto" style="FONT-SIZE: small;" />
+						<h:outputText value="Cód. do Produto" style="FONT-SIZE: small;" />
+						<h:outputText value="CFOP" style="FONT-SIZE: small;" />
+						<h:outputText value="Unidade Comercial" style="FONT-SIZE: small;" />
+						<h:outputText value="Quantidade" style="FONT-SIZE: small;" />
+						<h:outputText value="Valor Unitario" style="FONT-SIZE: small;" />
+						<h:outputText value="Valor Total" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.nome}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.codigo}"/>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.produtoNF.cfop}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaNaturezas}"/>
+						</h:selectOneMenu>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.unidadeCormecial}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.quantidade}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.valorUnitario}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.valorTotal}"/>
+						<h:outputText value="GTIN EAN" style="FONT-SIZE: small;" />
+						<h:outputText value="NCM" style="FONT-SIZE: small;" />
+						<h:outputText value="Execeção Tab. IPI" style="FONT-SIZE: small;" />
+						<h:outputText value="Total Frete" style="FONT-SIZE: small;" />
+						<h:outputText value="Total Seguro" style="FONT-SIZE: small;" />
+						<h:outputText value="Total desconto" style="FONT-SIZE: small;" />
+						<h:outputText value="Outras Despesas" style="FONT-SIZE: small;" />
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.gtin}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.ncm}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.exececao}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.totalFrete}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.totalSeguro}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.totalDesconto}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.outrasDespesas}"/>
+				</h:panelGrid>
+				<h:panelGrid columns="6">
+						<h:outputText value="Situação Tributária" style="FONT-SIZE: small;" />
+						<h:outputText value="Origem" style="FONT-SIZE: small;" />
+						<h:outputText value="Modalidade BC" style="FONT-SIZE: small;" />
+						<h:outputText value="Base de Calculao($)" style="FONT-SIZE: small;" />
+						<h:outputText value="Alíquota do ICMS(%)" style="FONT-SIZE: small;" />
+						<h:outputText value="Valor do ICMS($)" style="FONT-SIZE: small;" />
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.produtoNF.situacaoTributaria}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaSituacaoTributaria}"/>
+						</h:selectOneMenu>
+						 <h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.produtoNF.origem}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaOrigens}"/>
+						</h:selectOneMenu>
+						<h:selectOneMenu value="#{notaFiscalEletronicaControlerBean.produtoNF.modalidadeBC}" style=" width : 178px;" >
+						 <f:selectItems 
+						     value="#{notaFiscalEletronicaControlerBean.listaModalidadeBC}"/>
+						</h:selectOneMenu>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.baseDeCalculo}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.alicotaIcms}"/>
+						<h:inputText value="#{notaFiscalEletronicaControlerBean.produtoNF.valorIcms}"/>
+				</h:panelGrid>
+				 <a:commandButton action="#{notaFiscalEletronicaControlerBean.addProduto}"
+								value="Adiciona Produto" reRender="tabelaProdutoNF,gridProduto,modalAddProduto" />
+				</a:form>
+			</rich:modalPanel>
+			
+	</ui:define>
+</ui:composition>

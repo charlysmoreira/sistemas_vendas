@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+     		 	template="/template/menu.xhtml">
+
+	<ui:define name="body">
+	<a:keepAlive beanName="reletorioPedidoControllerBean"></a:keepAlive>
+		<rich:panel bodyClass="rich-laguna-panel-no-header">
+        	<a:form id="pedidoForm" prependId="false">
+				<rich:simpleTogglePanel id="simplePanelFerramentas"
+					switchType="client" label="Relatórios de Pedido" >
+					<h:panelGrid columns="2">
+						<h:outputText value="Data Inicial" style="FONT-SIZE: small;" />
+						<h:outputText value="Data Final" style="FONT-SIZE: small;" />
+						<a:outputPanel id="calendarInicio" layout="block" 
+							style=" width : 220px;">
+							<rich:calendar	value="#{reletorioPedidoControllerBean.dataInicial}" required="true" requiredMessage="Data Inicial é Obrigatório"
+								datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+								style="width:200px" />
+						</a:outputPanel>
+						<a:outputPanel id="calendarFim" layout="block" 
+							style=" width : 220px;">
+							<rich:calendar	value="#{reletorioPedidoControllerBean.dataFinal}" required="true" requiredMessage="Data Final é Obrigatório"
+								datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+								style="width:200px" />
+						</a:outputPanel>
+					</h:panelGrid>
+					<a:commandButton value="Relatório" action="#{reletorioPedidoControllerBean.reportGenerate}"
+					id="reportButton"  reRender="pedidoForm,relatorio" />
+					<rich:messages layout="table" tooltip="true" showDetail="false"
+							showSummary="true">
+						<f:facet name="errorMarker">
+							<h:graphicImage url="/images/attencion.png" />
+						</f:facet>
+						<f:facet name="infoMarker">
+							<h:graphicImage url="/images/infor.png" />
+						</f:facet>
+					</rich:messages>
+				</rich:simpleTogglePanel>        	
+        		<rich:spacer height="20" />
+        		<rich:simpleTogglePanel switchType="client" id="relatorio" opened="#{reletorioPedidoControllerBean.isToggle()}">
+					<f:facet name="header">Relatório</f:facet>
+					<h:panelGroup>
+						<h:panelGrid columns="2">
+							<h:commandButton action="#{reletorioPedidoControllerBean.reportGenerateInXls}"
+								value="Exportar para Xls" />
+							<h:commandButton action="#{reletorioPedidoControllerBean.reportGenerateInPdf}"
+								value="Exportar para Pdf" />
+						</h:panelGrid>
+					
+					</h:panelGroup>
+					<div
+						style="height: 500px; background-color: #F2F5FA; overflow: auto; text-align: center;">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td align="center"><h:outputText escape="false"
+								value="#{reletorioPedidoControllerBean.reportHtml}"/>
+							</td>
+						</tr>
+					</table>
+					</div>
+				</rich:simpleTogglePanel>
+        	</a:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:s="http://jboss.com/products/seam/taglib"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:f="http://java.sun.com/jsf/core"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:rich="http://richfaces.org/rich"
+    			xmlns:a="http://richfaces.org/a4j"
+      			template="/template/menu.xhtml">
+
+	<ui:define name="body">
+		<a:form>
+			<a:keepAlive beanName="pedidoControlerBean" />
+			<rich:panel header="Visualizar Pedido" id="panelVisualizar">
+			 	<h:panelGrid columns="2">
+			    		<h:outputText value="Número do Pedido:" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+					    <h:outputText value="#{pedidoControlerBean.numeroPedido}" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+			    </h:panelGrid>
+			    <rich:separator height="2" lineType="solid" />
+					<h:panelGrid columns="2" style=" width : 100%;">
+						<h:outputText value="Dados do Cliente" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+						<h:outputText value="Dados do Pedido" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+						<h:panelGrid columns="2" style=" width : 278px;">
+						<h:outputText value="Nome:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.nome}"/>
+						<h:outputText value="CNPJ/CPF:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.cnpj}"/>
+						<h:outputText value="Telefone:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.telefone}"/>
+						<h:outputText value="Email:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.email}"/>
+						<h:outputText value="Endereço:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.endereco}"/>
+						<h:outputText value="Bairro:" style="FONT-WEIGHT: bold;"/>
+						<h:outputText value="#{pedidoControlerBean.cliente.bairro}"/>
+						</h:panelGrid>
+						<h:panelGrid columns="2" style=" width : 338px;">
+						<h:outputText value="Funcionário:" style="FONT-WEIGHT: bold;"/>
+					    <h:outputText value="#{pedidoControlerBean.pedido.vendedor.nome}"/>
+					    <h:outputText value="Data da Venda:" style="FONT-WEIGHT: bold;"/>
+					    <h:outputText value="#{pedidoControlerBean.dataAtual}">
+					    	<f:convertDateTime pattern="dd/MM/yyyy" />
+					    </h:outputText>
+					    <h:outputText value="Frete" style="FONT-SIZE: small;" />
+					    <h:outputText value="#{pedidoControlerBean.pedido.frete}"/>
+					    <h:outputText value="Data de Entraga" style="FONT-SIZE: small;" />
+					    <h:outputText value="#{pedidoControlerBean.pedido.dataEntrega}"/>
+					    </h:panelGrid>
+					</h:panelGrid>
+					
+				<rich:dataTable width="100%" rows="10" id="tabelaVisualizar"
+					value="#{pedidoControlerBean.listaDePedidoFeita}" border="1"
+					var="pedidoVisual">
+					 
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Categoria" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.categoriaNome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Código" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.codigo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Valor Unitário" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.valorUnidade}" />
+					</rich:column>
+					 <rich:column>
+						<f:facet name="header">
+							<h:outputText value="Quantidade" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.quantidade}" />
+					</rich:column>
+					 <rich:column>
+						<f:facet name="header">
+							<h:outputText value="Total Parcial" style="FONT-WEIGHT: bold;" />
+						</f:facet>
+						<h:outputText value="#{pedidoVisual.totalParcial}" />
+					</rich:column>
+
+				</rich:dataTable>
+				<h:panelGrid style=" width : 100%;">
+					<h:outputText value="Forma de Pagamento" style="FONT-SIZE: small; FONT-WEIGHT: bold;"/>
+					<h:outputText value="#{pedidoControlerBean.formaDePagamento.pagamento}" style="FONT-WEIGHT: bold;"/>
+					<h:outputText value="Valor Total" style="FONT-SIZE: x-small; FONT-WEIGHT: bold;"/>
+					<h:outputText value="#{pedidoControlerBean.valorTotal}" style="FONT-WEIGHT: bold;"/>
+				</h:panelGrid>
+				<rich:separator height="2" lineType="solid" />
+					<rich:spacer height="20" />
+					<a:commandButton action="#{pedidoControlerBean.salvar}" value="Confirmar Venda" />
+			</rich:panel>
+			<a:status id="statusAguarde" onstart="Richfaces.showModalPanel('ajaxLoadingModalBox',{top:300})" 
+			     		onstop="Richfaces.hideModalPanel('ajaxLoadingModalBox')"/>
+				<rich:modalPanel id="ajaxLoadingModalBox" autosized="true" width="58" height="50">
+				     <div class="loader">
+						Aguarde...
+						<br/>
+						<h:graphicImage id="imgLoader" value="/images/loader.gif"/>
+					</div>
+				</rich:modalPanel>
+		</a:form>
+	</ui:define>
+</ui:composition>
